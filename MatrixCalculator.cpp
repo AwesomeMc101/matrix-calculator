@@ -173,6 +173,23 @@ namespace IO {
             std::cout << "- Your Result -\n";
             IO::Drawing::drawMatrix(C);
         }
+        void scale(Matrix A, double scale)
+        {
+            system("cls");
+
+            Matrix C = A;
+            C.vals.clear();
+
+
+            for (int i = 0; i < A.vals.size(); i++)
+            {
+                C.vals.push_back((A.vals[i]) * scale);
+            }
+
+            std::cout << "- Your Result -\n";
+            IO::Drawing::drawMatrix(C);
+        }
+
     }
 
     Matrix getNewMatrix()
@@ -295,6 +312,25 @@ namespace IO {
             }
             Mathematics::mul(A, B);
         }
+        if (type == "SCA")
+        {
+            std::cout << "What matrix would you like to scale? Enter the name. ";
+            std::string matrixA = "";
+            std::cin >> matrixA;
+            std::cout << "\nBy how much? ";
+            double scalar = 0;
+            std::cin >> scalar;
+
+            Matrix A;
+            for (Matrix ma : matrices)
+            {
+                if (ma.name == matrixA)
+                {
+                    A = ma;
+                }
+            }
+            Mathematics::scale(A, scalar);
+        }
         return 0;
     }
 
@@ -304,6 +340,7 @@ namespace IO {
         std::cout << "What would you like to do?\nNEW - new matrix\nLIST - list matrices\nMATH - perform math\n";
         std::string type = "";
         std::cin >> type;
+
 
         if (type == "NEW")
         {
@@ -361,13 +398,3 @@ int main()
     }
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
